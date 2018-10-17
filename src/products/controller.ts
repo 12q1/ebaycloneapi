@@ -1,5 +1,5 @@
 // src/products/controller.ts
-import { JsonController, Get, Param } from 'routing-controllers'
+import { JsonController, Get, Param, Post, HttpCode, Body } from 'routing-controllers'
 import Product from './entity'
 
 @JsonController()
@@ -18,4 +18,11 @@ export default class ProductController {
     return { products }
     }
 
+    @Post('/products')
+    @HttpCode(201)
+    createPage(
+    @Body() product: Product
+    ) {
+    return product.save()
+    }
 }
