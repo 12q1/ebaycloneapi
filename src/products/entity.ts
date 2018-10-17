@@ -31,4 +31,8 @@ export default class Product extends BaseEntity {
   @MinLength(8)
   @Column('text')
   sellerPhone?: string
+  
+  @IsString()
+  @Column('text')
+  imgUrl: string
 }
