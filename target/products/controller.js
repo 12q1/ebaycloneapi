@@ -13,15 +13,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const data_1 = require("./data");
+const entity_1 = require("./entity");
 let ProductController = class ProductController {
-    getProduct(id) {
-        return data_1.default[id];
+    getPage(id) {
+        return entity_1.default.findOne(id);
     }
-    allProducts() {
-        return {
-            products: Object.keys(data_1.default).map(key => data_1.default[key])
-        };
+    async allProducts() {
+        const products = await entity_1.default.find();
+        return { products };
+    }
+    createPage(product) {
+        return product.save();
     }
 };
 __decorate([
@@ -29,14 +31,22 @@ __decorate([
     __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "getProduct", null);
+    __metadata("design:returntype", void 0)
+], ProductController.prototype, "getPage", null);
 __decorate([
     routing_controllers_1.Get('/products'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", Promise)
 ], ProductController.prototype, "allProducts", null);
+__decorate([
+    routing_controllers_1.Post('/products'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [entity_1.default]),
+    __metadata("design:returntype", void 0)
+], ProductController.prototype, "createPage", null);
 ProductController = __decorate([
     routing_controllers_1.JsonController()
 ], ProductController);
