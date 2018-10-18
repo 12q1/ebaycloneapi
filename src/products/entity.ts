@@ -19,9 +19,8 @@ export default class Product extends BaseEntity {
   @Column('text', {nullable:false})
   description: string
 
-  @IsNumber()
-  @Column('decimal')
-  price?: number
+  @Column('varchar')
+  price?: any
 
   @IsEmail()
   @Column('text')
