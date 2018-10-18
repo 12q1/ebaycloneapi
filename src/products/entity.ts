@@ -1,7 +1,7 @@
 // src/products/entity.ts
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
-import { IsString, IsNumber, IsEmail, MinLength } from 'class-validator'
+import { IsString, IsEmail, MinLength } from 'class-validator'
 
 @Entity()
 export default class Product extends BaseEntity {
